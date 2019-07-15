@@ -1,11 +1,11 @@
 import java.util.Scanner;
-import me.elhoussam.nbtolettre.NumbreToLettre;
+import me.elhoussam.nbtolettre.GenFr;
 
 public class Main {
 	public static void main(String argv[]) throws Exception{
 		@SuppressWarnings("resource")
 		Scanner sc  = new Scanner(System.in);
-		NumbreToLettre obj = new NumbreToLettre();
+		GenFr obj = new GenFr();
 		long a = 1 ;
 		while ( a >= 0) {
 						

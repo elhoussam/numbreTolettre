@@ -1,25 +1,6 @@
 package me.elhoussam.nbtolettre;
-import java.util.Vector;
-public class NumbreToLettre {
-	private  Boolean Color = false;
-	public void ToggleColor() {
-		this.Color = ! this.Color ;
-	}
-	// Print function that simply print str in the console
-	public static void print( Object obj ) {
-		System.out.print( obj );
-	}
+public class GenEn extends NumToLet {
 
-	/*
-	 * inner class NB : that store the Nombre with it scale 
-	 * */
-	public class NB{
-		short nb; // short
-		String str ;
-		public NB(short a/*short*/, String b) {
-			this.nb=a; this.str =b;
-		}
-	}
 	/*
 	 * Enum BasicNombre : represente the tiny DB for this App
 	 * 			which is contain the basic nombre that used 
@@ -87,30 +68,28 @@ public class NumbreToLettre {
 				return nbr;
 			}
 		}
-	/*
-	 * Generate Function : start devide the number and store into
-	 * 	smaller pieces with it scale int NB's Objects
-	 * */
+	@Override
 	public void Generate(long InputNombre){
 		long innerVal =  InputNombre ; 
-		byte i=0 ;
+		byte i=0, counter =0;
 		String innerStr = "";
 		// the 1st part dividing the number and store it in NB 
 		while ( innerVal > 0 ) {
 			short localvar = (short) (innerVal % 1000) ;
 			if ( localvar > 0 ){
 				// parsing the differente part of the numbre
-				NB o =(new NumbreToLettre()).new NB(localvar,
-			    				((Color)?BasicNombre.ColorAnsi[i]:"").concat( 
-			    				BasicNombre.ScaleNombre[i]).concat(
-			    				(Color)?BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1]:"") 
-			    				); 
+				NB o =(new GenEn()).new NB(localvar,
+			    	((Color)?BasicNombre.ColorAnsi[i]:"").concat( 
+			    	BasicNombre.ScaleNombre[i]).concat(
+			    	(Color)?BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1]:"") 
+			    	); 
 			    // constructing part of the numbre
 				String localstr="";
-				if ( i != 0 )
+				if ( counter > 0 )
 					localstr = " et ";
 					innerStr = (BasicParser( o.nb ).toString().concat( o.str )
 							+localstr+innerStr);
+					counter++;
 			}i++;
 			innerVal = innerVal / 1000;
 		}
@@ -191,7 +170,3 @@ public class NumbreToLettre {
 	}
 
 }
-/*
- * int 2 147 483 647 : 2 milliard => 10^9
- * long 9 223 372 036 854 775 807 : 9 Trillion => 10^18
- * */
