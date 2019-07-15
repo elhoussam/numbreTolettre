@@ -1,21 +1,22 @@
 import java.util.Scanner;
-import static me.elhoussam.nbtolettre.NumbreToLettre.*;
+import me.elhoussam.nbtolettre.NumbreToLettre;
 
 public class Main {
 	public static void main(String argv[]) throws Exception{
 		@SuppressWarnings("resource")
 		Scanner sc  = new Scanner(System.in);
-		
+		NumbreToLettre obj = new NumbreToLettre();
 		long a = 1 ;
 		while ( a >= 0) {
 						
-		print("Hat Ra9mek : ");
+		obj.print("Number : ");
 		 a = sc.nextLong() ;
-		Generate( a );
+		 obj.Generate( a );
 		//sc.close();
-		print("\n");
+		 obj.ToggleColor();
+		 obj.print("\n");
 		}
-		print ("End.\n");
+		obj.print ("End.\n");
 		
 	}
 	

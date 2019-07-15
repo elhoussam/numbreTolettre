@@ -9,6 +9,10 @@ public class NumbreToLettre {
 	 * 			to construct the other nombres
 	 * 
 	 * */
+	private  Boolean Color = false;
+	public void ToggleColor() {
+		this.Color = ! this.Color ;
+	}
 	enum BasicNombre {
 		Zéro((byte)0,"Zéro"),
 		Un((byte)1,"Un"),
@@ -90,7 +94,7 @@ public class NumbreToLettre {
 	 * Generate Function : start devide the number and store into
 	 * 	smaller pieces with it scale int NB's Objects
 	 * */
-	public static void Generate(long InputNombre){
+	public void Generate(long InputNombre){
 		long innerVal =  InputNombre ; 
 		byte i=0 ;
 		String innerStr = "";
@@ -101,8 +105,10 @@ public class NumbreToLettre {
 			if ( localvar > 0 ){
 				numVec.add(
 			    		(new NumbreToLettre()).new NB(localvar,
-			    				BasicNombre.ColorAnsi[i] + BasicNombre.ScaleNombre[i]+
-			    				BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1])
+			    				((Color)?BasicNombre.ColorAnsi[i]:"").concat( 
+			    				BasicNombre.ScaleNombre[i]).concat(
+			    				(Color)?BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1]:"") 
+			    								)
 			    		);
 			}i++;
 			innerVal = innerVal / 1000;
@@ -124,7 +130,7 @@ public class NumbreToLettre {
 	 * 				to the Input, finally print the letter
 	 *
 	 * */
-	public static String BasicParser( short inputNombre ) {
+	private String BasicParser( short inputNombre ) {
 		short innerValue = inputNombre ;
 		String innerStr = "";
 		// Starting with hundred part of number
@@ -141,13 +147,15 @@ public class NumbreToLettre {
 	 * 				to the Input, finally print the letter
 	 *
 	 * */
-	static String HundredParser(short inputNombre) {
+	private String HundredParser(short inputNombre) {
 		byte innerVal = (byte)(inputNombre / 100) ;
 		String str = "";
 		if ( innerVal != 0 ) {
 			if (innerVal != 1) 
 				str = str.concat( BasicNombre.get( innerVal ) );
-			str = str.concat(BasicNombre.ColorAnsi[0]+" Cent "+BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1]);
+			str = str.concat(
+					((Color)?BasicNombre.ColorAnsi[0]:"").concat(" Cent ").concat(
+					(Color)?BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1]:""));
 			
 		}
 		return str ;
