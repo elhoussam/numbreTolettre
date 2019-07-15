@@ -1,19 +1,32 @@
 package me.elhoussam.nbtolettre;
-import java.util.Scanner;
 import java.util.Vector;
-
 public class NumbreToLettre {
+	private  Boolean Color = false;
+	public void ToggleColor() {
+		this.Color = ! this.Color ;
+	}
+	// Print function that simply print str in the console
+	public static void print( Object obj ) {
+		System.out.print( obj );
+	}
+
+	/*
+	 * inner class NB : that store the Nombre with it scale 
+	 * */
+	public class NB{
+		short nb; // short
+		String str ;
+		public NB(short a/*short*/, String b) {
+			this.nb=a; this.str =b;
+		}
+	}
 	/*
 	 * Enum BasicNombre : represente the tiny DB for this App
 	 * 			which is contain the basic nombre that used 
 	 * 			to construct the other nombres
 	 * 
 	 * */
-	private  Boolean Color = false;
-	public void ToggleColor() {
-		this.Color = ! this.Color ;
-	}
-	enum BasicNombre {
+	private enum BasicNombre {
 		Zéro((byte)0,"Zéro"),
 		Un((byte)1,"Un"),
 		Deux((byte)0,"Deux"), Trois((byte)0,"Trois"), 
@@ -28,11 +41,16 @@ public class NumbreToLettre {
 		Vingt((byte)20,"Vingt"), Trente((byte)30,"Trente"),
 		Quarante((byte)40,"Quarante"), Cinquante((byte)50,"Cinquante"), 
 		Soixante((byte)60,"Soixante"), QuatreVingt((byte)80,"Quatre Vingt");
-		private byte nb;
 		private String lettre ;
+		static String ScaleNombre[]
+				={""," Mille"," Million"," Milliard", //10^3 >- 0, 10^6 >- 1 ,10^9>-2
+			 " Billion"," Billiard"," Trillion", " Trilliard"}; 
+		 //10^12>-3, 10^15>-4, 10^18>-5, 10^21>-6 
+		static String ColorAnsi[]
+				= {"\u001B[31m","\u001B[32m","\u001B[33m",
+				"\u001B[34m","\u001B[35m","\u001B[36m","\u001B[38m","\u001B[0m" };
 			
 			BasicNombre(byte nbr, String ltr){
-			this.nb = nbr;
 			this.lettre = ltr;
 			}
 			static String get(byte i) {
@@ -68,28 +86,7 @@ public class NumbreToLettre {
 				}
 				return nbr;
 			}
-			static String ScaleNombre[]
-					={""," Mille"," Million"," Milliard", //10^3 >- 0, 10^6 >- 1 ,10^9>-2
-				 " Billion"," Billiard"," Trillion", " Trilliard"}; 
-			 //10^12>-3, 10^15>-4, 10^18>-5, 10^21>-6 
-			static String ColorAnsi[]
-					= {"\u001B[31m","\u001B[32m","\u001B[33m",
-					"\u001B[34m","\u001B[35m","\u001B[36m","\u001B[38m","\u001B[0m" };
 		}
-	// Print function that simply print str in the console
-	public static void print( Object obj ) {
-		System.out.print( obj );
-	}
-	/*
-	 * inner class NB : that store the Nombre with it scale 
-	 * */
-	public class NB{
-		short nb; // short
-		String str ;
-		public NB(short a/*short*/, String b) {
-			this.nb=a; this.str =b;
-		}
-	}
 	/*
 	 * Generate Function : start devide the number and store into
 	 * 	smaller pieces with it scale int NB's Objects
@@ -98,28 +95,24 @@ public class NumbreToLettre {
 		long innerVal =  InputNombre ; 
 		byte i=0 ;
 		String innerStr = "";
-		Vector<NB> numVec = new Vector<NB>(); 
-		// the 1st part dividing the number and store it in numVec 
+		// the 1st part dividing the number and store it in NB 
 		while ( innerVal > 0 ) {
 			short localvar = (short) (innerVal % 1000) ;
 			if ( localvar > 0 ){
-				numVec.add(
-			    		(new NumbreToLettre()).new NB(localvar,
+				// parsing the differente part of the numbre
+				NB o =(new NumbreToLettre()).new NB(localvar,
 			    				((Color)?BasicNombre.ColorAnsi[i]:"").concat( 
 			    				BasicNombre.ScaleNombre[i]).concat(
 			    				(Color)?BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1]:"") 
-			    								)
-			    		);
+			    				); 
+			    // constructing part of the numbre
+				String localstr="";
+				if ( i != 0 )
+					localstr = " et ";
+					innerStr = (BasicParser( o.nb ).toString().concat( o.str )
+							+localstr+innerStr);
 			}i++;
 			innerVal = innerVal / 1000;
-		}
-		// the 2nd part construction the str from the numVec
-		for (NB o : numVec) {
-			String localstr="";
-			if ( numVec.indexOf(o) != 0 )
-				localstr = " et ";
-				innerStr = (BasicParser( o.nb ).toString().concat( o.str )
-						+localstr+innerStr);		
 		}
 		// print the result 
 		print( (InputNombre != 0)? innerStr : TensParser( (short) innerVal ) );
@@ -166,7 +159,7 @@ public class NumbreToLettre {
 	 * 				to the Input, finally print the letter
 	 *
 	 * */
-	static String TensParser(short inputNombre) {
+	private String TensParser(short inputNombre) {
 		byte innerVal = (byte) inputNombre, unit ;
 		String str = "";
 		 // First Sénario
