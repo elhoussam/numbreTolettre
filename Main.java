@@ -1,22 +1,21 @@
-import java.util.Scanner;
 import me.elhoussam.nbtolettre.GenFr;
+import me.elhoussam.nbtolettre.NumToLet;
+import static me.elhoussam.nbtolettre.NumToLet.*;
 
 public class Main {
 	public static void main(String argv[]) throws Exception{
-		@SuppressWarnings("resource")
-		Scanner sc  = new Scanner(System.in);
-		GenFr obj = new GenFr();
+		NumToLet obj ;
 		long a = 1 ;
 		while ( a >= 0) {
-						
-		obj.print("Number : ");
-		 a = sc.nextLong() ;
-		 obj.Generate( a );
+		
+		a = NumToLet.ScanInput();
+		//obj= new GenEn(); 	obj.Generate( a );
+		obj= new GenFr(); 		obj.Generate( a );
 		//sc.close();
-		 obj.ToggleColor();
-		 obj.print("\n");
+		ToggleColor();
+		print("\n");
 		}
-		obj.print ("End.\n");
+		print ("End.\n");
 		
 	}
 	

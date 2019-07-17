@@ -4,19 +4,19 @@ import java.util.Hashtable;
 
 public class GenFr extends NumToLet {
 	public GenFr() {
-	Hashtable<Integer, String> htbl = new Hashtable<Integer, String>();
-			htbl.put(0,"Zéro"); htbl.put(1,"Un"); htbl.put(2, "Deux"); 
-			htbl.put(3, "Trois"); htbl.put(4, "Quatre"); htbl.put(5, "Cinq"); 
-			htbl.put(6, "Six"); htbl.put(7, "Sept"); htbl.put(8, "Huit"); 
-			htbl.put(9, "Neuf"); htbl.put(10, "Dix"); htbl.put(11, "Onze"); 
-			htbl.put(12, "Douze"); htbl.put(13, "Treize"); htbl.put(14, "Quatorze"); 
-			htbl.put(15, "Quinze"); htbl.put(16, "Seize"); htbl.put(17, "Dix-Sept"); 
-			htbl.put(18, "Dix-Huit"); htbl.put(19, "Dix-Neuf"); htbl.put(20, "Vingt"); 
-			htbl.put(30, "Trente"); htbl.put(40, "Quarante"); htbl.put(50, "Cinquante"); 
-			htbl.put(60, "Soixante"); htbl.put(80, "Quatre Vingt");  
-	String ScNombre [] = {""," Mille"," Million"," Milliard", " Billion"," Billiard"," Trillion", " Trilliard"}; 
-				
-		Init(htbl, ScNombre);
+		Hashtable<Integer, String> htbl = new Hashtable<Integer, String>();
+		htbl.put(0,"Zéro"); htbl.put(1,"Un"); htbl.put(2, "Deux"); 
+		htbl.put(3, "Trois"); htbl.put(4, "Quatre"); htbl.put(5, "Cinq"); 
+		htbl.put(6, "Six"); htbl.put(7, "Sept"); htbl.put(8, "Huit"); 
+		htbl.put(9, "Neuf"); htbl.put(10, "Dix"); htbl.put(11, "Onze"); 
+		htbl.put(12, "Douze"); htbl.put(13, "Treize"); htbl.put(14, "Quatorze"); 
+		htbl.put(15, "Quinze"); htbl.put(16, "Seize"); htbl.put(17, "Dix-Sept"); 
+		htbl.put(18, "Dix-Huit"); htbl.put(19, "Dix-Neuf"); htbl.put(20, "Vingt"); 
+		htbl.put(30, "Trente"); htbl.put(40, "Quarante"); htbl.put(50, "Cinquante"); 
+		htbl.put(60, "Soixante"); htbl.put(80, "Quatre Vingt");  
+		String ScNombre [] = {""," Mille"," Million"," Milliard", " Billion"," Billiard"," Trillion", " Trilliard"}; 
+	
+		Init(htbl, ScNombre,"et");
 	}
 	/*
 	 * function BasicParser : that take short as Input

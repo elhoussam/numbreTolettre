@@ -1,100 +1,23 @@
 package me.elhoussam.nbtolettre;
-public class GenEn extends NumToLet {
 
-	/*
-	 * Enum BasicNombre : represente the tiny DB for this App
-	 * 			which is contain the basic nombre that used 
-	 * 			to construct the other nombres
-	 * 
-	 * */
-	private enum BasicNombre {
-		Zéro((byte)0,"Zéro"),
-		Un((byte)1,"Un"),
-		Deux((byte)0,"Deux"), Trois((byte)0,"Trois"), 
-		Quatre((byte)0,"Quatre"), Cinq((byte)0,"Cinq"),
-		Six((byte)0,"Six"), Sept((byte)0,"Sept"), 
-		Huit((byte)0,"Huit"), Neuf((byte)0,"Neuf"), 
-		Dix((byte)0,"Dix"), Onze((byte)0,"Onze"), 
-		Douze((byte)0,"Douze"),Treize((byte)0,"Treize"), 
-		Quatorze((byte)0,"Quatorze"), Quinze((byte)0,"Quinze"), 
-		Seize((byte)0,"Seize"), DixSept((byte)0,"Dix-Sept"),
-		DixHuit((byte)18,"Dix-Huit"), DixNeuf((byte)0,"Dix-Neuf"), 
-		Vingt((byte)20,"Vingt"), Trente((byte)30,"Trente"),
-		Quarante((byte)40,"Quarante"), Cinquante((byte)50,"Cinquante"), 
-		Soixante((byte)60,"Soixante"), QuatreVingt((byte)80,"Quatre Vingt");
-		private String lettre ;
-		static String ScaleNombre[]
-				={""," Mille"," Million"," Milliard", //10^3 >- 0, 10^6 >- 1 ,10^9>-2
-			 " Billion"," Billiard"," Trillion", " Trilliard"}; 
-		 //10^12>-3, 10^15>-4, 10^18>-5, 10^21>-6 
-		static String ColorAnsi[]
-				= {"\u001B[31m","\u001B[32m","\u001B[33m",
-				"\u001B[34m","\u001B[35m","\u001B[36m","\u001B[38m","\u001B[0m" };
-			
-			BasicNombre(byte nbr, String ltr){
-			this.lettre = ltr;
-			}
-			static String get(byte i) {
-				String nbr = "";
-				switch( i ) {
-				case 0 : nbr =  BasicNombre.Zéro.lettre;  break;
-				case 1 : nbr =  BasicNombre.Un.lettre;  break;
-				case 2 : nbr =  BasicNombre.Deux.lettre; break;
-				case 3 : nbr =  BasicNombre.Trois.lettre; break;
-				case 4 : nbr =  BasicNombre.Quatre.lettre; break;
-				case 5 : nbr =  BasicNombre.Cinq.lettre; break;
-				case 6 : nbr =  BasicNombre.Six.lettre; break;
-				case 7 : nbr =  BasicNombre.Sept.lettre; break;
-				case 8 : nbr =  BasicNombre.Huit.lettre; break;
-				case 9 : nbr =  BasicNombre.Neuf.lettre; break;
-				case 10 : nbr =  BasicNombre.Dix.lettre; break;
-				case 11 : nbr =  BasicNombre.Onze.lettre; break;
-				case 12 : nbr =  BasicNombre.Douze.lettre; break;
-				case 13 : nbr =  BasicNombre.Treize.lettre; break;
-				case 14 : nbr =  BasicNombre.Quatorze.lettre; break;
-				case 15 : nbr =  BasicNombre.Quinze.lettre; break;
-				case 16 : nbr =  BasicNombre.Seize.lettre; break;
-				case 17 : nbr =  BasicNombre.DixSept.lettre; break;
-				case 18 : nbr =  BasicNombre.DixHuit.lettre; break;
-				case 19 : nbr =  BasicNombre.DixNeuf.lettre; break;
-				case 20 : nbr =  BasicNombre.Vingt.lettre; break;
-				case 30 : nbr =  BasicNombre.Trente.lettre; break;
-				case 40 : nbr =  BasicNombre.Quarante.lettre; break;
-				case 50 : nbr =  BasicNombre.Cinquante.lettre; break;
-				case 60 : nbr =  BasicNombre.Soixante.lettre; break;
-				case 80 : nbr =  BasicNombre.QuatreVingt.lettre; break;
-				
-				}
-				return nbr;
-			}
-		}
-	@Override
-	public void Generate(long InputNombre){
-		long innerVal =  InputNombre ; 
-		byte i=0, counter =0;
-		String innerStr = "";
-		// the 1st part dividing the number and store it in NB 
-		while ( innerVal > 0 ) {
-			short localvar = (short) (innerVal % 1000) ;
-			if ( localvar > 0 ){
-				// parsing the differente part of the numbre
-				NB o =(new GenEn()).new NB(localvar,
-			    	((Color)?BasicNombre.ColorAnsi[i]:"").concat( 
-			    	BasicNombre.ScaleNombre[i]).concat(
-			    	(Color)?BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1]:"") 
-			    	); 
-			    // constructing part of the numbre
-				String localstr="";
-				if ( counter > 0 )
-					localstr = " et ";
-					innerStr = (BasicParser( o.nb ).toString().concat( o.str )
-							+localstr+innerStr);
-					counter++;
-			}i++;
-			innerVal = innerVal / 1000;
-		}
-		// print the result 
-		print( (InputNombre != 0)? innerStr : TensParser( (short) innerVal ) );
+import java.util.Hashtable;
+
+public class GenEn extends NumToLet {
+	public GenEn() {
+		Hashtable<Integer, String> htbl = new Hashtable<Integer, String>();
+		htbl.put(0,"Zero"); htbl.put(1,"One"); htbl.put(2, "Two"); 
+		htbl.put(3, "Three"); htbl.put(4, "Four"); htbl.put(5, "Five"); 
+		htbl.put(6, "Six"); htbl.put(7, "Seven"); htbl.put(8, "Height"); 
+		htbl.put(9, "Nine"); htbl.put(10, "Ten"); htbl.put(11, "Eleven"); 
+		htbl.put(12, "Twelve"); htbl.put(13, "Thirteen"); htbl.put(14, "Fourteen"); 
+		htbl.put(15, "Fifteen"); htbl.put(16, "Sixteen"); htbl.put(17, "Seventeen"); 
+		htbl.put(18, "Dix-Huit"); htbl.put(19, "Nineteen"); htbl.put(20, "Twenty"); 
+		htbl.put(30, "Thirty"); htbl.put(40, "Forty"); htbl.put(50, "Fifty"); 
+		htbl.put(60, "Sixty"); htbl.put(70, "Seventy");  
+		htbl.put(90, "Ninety"); htbl.put(80, "Eighty");  
+		String ScNombre [] = {""," Thousand"," Million"," Milliard", " Billion"," Billiard"," Trillion", " Trilliard"}; 
+	
+		Init(htbl, ScNombre,"and");
 	}
 	/*
 	 * function BasicParser : that take short as Input
@@ -102,7 +25,8 @@ public class GenEn extends NumToLet {
 	 * 				to the Input, finally print the letter
 	 *
 	 * */
-	private String BasicParser( short inputNombre ) {
+	@Override
+	protected String BasicParser( short inputNombre ) {
 		short innerValue = inputNombre ;
 		String innerStr = "";
 		// Starting with hundred part of number
@@ -119,15 +43,16 @@ public class GenEn extends NumToLet {
 	 * 				to the Input, finally print the letter
 	 *
 	 * */
-	private String HundredParser(short inputNombre) {
+	@Override
+	protected String HundredParser(short inputNombre) {
 		byte innerVal = (byte)(inputNombre / 100) ;
 		String str = "";
 		if ( innerVal != 0 ) {
 			if (innerVal != 1) 
-				str = str.concat( BasicNombre.get( innerVal ) );
+				str = str.concat( get( innerVal ) );
 			str = str.concat(
-					((Color)?BasicNombre.ColorAnsi[0]:"").concat(" Cent ").concat(
-					(Color)?BasicNombre.ColorAnsi[BasicNombre.ColorAnsi.length-1]:""));
+					((Color)?ColorAnsi[0]:"").concat(" Hundred ").concat(
+					(Color)?ColorAnsi[ColorAnsi.length-1]:""));
 			
 		}
 		return str ;
@@ -138,32 +63,33 @@ public class GenEn extends NumToLet {
 	 * 				to the Input, finally print the letter
 	 *
 	 * */
-	private String TensParser(short inputNombre) {
+	@Override
+	protected String TensParser(short inputNombre) {
 		byte innerVal = (byte) inputNombre, unit ;
 		String str = "";
 		 // First Sénario
 		if ( innerVal >=0 && innerVal <= 20 ) {
-			str = str.concat( BasicNombre.get( innerVal ) );
+			str = str.concat( get( innerVal ) );
 		// Second Sénario 
 		}else if ( (innerVal>=21 && innerVal<= 69) || (innerVal>=80 && innerVal<= 89)) {
 			unit = (byte) (innerVal % 10) ;
 			innerVal = (byte) (innerVal - unit) ;
-			str = str.concat( BasicNombre.get( innerVal ) );
+			str = str.concat( get( innerVal ) );
 
 			if( unit != 0 ) {
-				if ( unit == 1 ) str = str.concat(" et ");
+				if ( unit == 1 ) str = str.concat( this.link );
 				else str = str.concat("-");
-				str = str.concat( BasicNombre.get( unit ) );
+				str = str.concat( get( unit ) );
 			}
 		// Third Sénario	
 		}else if ( (innerVal>=70 && innerVal<= 79) || (innerVal>=90 && innerVal<= 99)) { 
 			unit = (byte) ((innerVal % 10 )+10);
 			innerVal = (byte) (innerVal - unit) ;
 			
-			str = str.concat( BasicNombre.get( innerVal ) ); 
-			if ( unit == 11 ) str = str.concat(" et ");
+			str = str.concat( get( innerVal ) ); 
+			if ( unit == 11 ) str = str.concat( this.link );
 			else str = str.concat("-");
-			str = str.concat( BasicNombre.get( unit ) );
+			str = str.concat( get( unit ) );
 			
 		}
 		return str ;

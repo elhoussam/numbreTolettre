@@ -1,25 +1,40 @@
 package me.elhoussam.nbtolettre;
+import static me.elhoussam.nbtolettre.NumToLet.print;
+
 import java.util.Hashtable;
+import java.util.Scanner;
 
 public abstract class NumToLet {
-	protected Boolean Color = false;
-	static Hashtable<Integer, String> BasicNumber = null; 
-	static String ScaleNombre[]		= null ;
+	static Boolean Color = false;
+	protected String link;
+	protected Hashtable<Integer, String> BasicNumber = null; 
+	protected String ScaleNombre[]		= null ;
 	static String ColorAnsi[]= {"\u001B[31m","\u001B[32m","\u001B[33m","\u001B[34m","\u001B[35m","\u001B[36m","\u001B[38m","\u001B[0m" };
-	static void Init( Hashtable<Integer, String> ht, String scalenombre[]) {
-		BasicNumber = ((Hashtable<Integer, String>) ht.clone());
+	@SuppressWarnings("unchecked")
+	protected void Init( Hashtable<Integer, String> ht, String scalenombre[], String Link) {
+		BasicNumber = (Hashtable<Integer, String>) ht.clone();
 		ScaleNombre = scalenombre.clone() ;
-		print( BasicNumber.get(30) +"\n");
-		print( ScaleNombre[2] +"\n" + ScaleNombre[ScaleNombre.length-1]);
+		link = (" ".concat( Link.toString())).concat(" ");
 	}	
-	static String get(byte i) {
+	public static Long ScanInput() {
+		Scanner sc  = new Scanner(System.in);
+		Long a = 0L ; Boolean checker= false ;
+		while( !checker ) {
+			try{print("Number : "); a = sc.nextLong() ; 
+			checker=(a<0)?false:true;
+			print((!checker)?ColorAnsi[0]+"should be greater then or equal zero\n"+ColorAnsi[ColorAnsi.length-1]:"" );
+			}catch(Exception e ){ sc.next(); print(ColorAnsi[3]+"this number is too long\n"+ColorAnsi[ColorAnsi.length-1]);	}
+		}
+		return a;
+	}
+	protected String get(byte i) {
 		String s = BasicNumber.get((int) i );
 		return s ;
 	}
-	public void ToggleColor() {
+	
+	public static void ToggleColor() {
 		Color = ! Color ;
 	}
-
 	// Print function that simply print str in the console
 	public static void print( Object obj ) {
 		System.out.print( obj );
@@ -40,7 +55,6 @@ public abstract class NumToLet {
 	 * 	smaller pieces with it scale int NB's Objects
 	 * 
 	 * */
-	
 	public void Generate(long InputNombre){
 		long innerVal =  InputNombre ; 
 		byte i=0, counter =0;
@@ -58,7 +72,7 @@ public abstract class NumToLet {
 			    // constructing part of the numbre
 				String localstr="";
 				if ( counter > 0 )
-					localstr = " et ";
+					localstr = this.link ; // if en => and , fr => et
 					innerStr = (BasicParser( o.nb ).toString().concat( o.str )
 							+localstr+innerStr);
 					counter++;
@@ -70,10 +84,7 @@ public abstract class NumToLet {
 	}
 	protected abstract String BasicParser( short inputNombre );
 	protected abstract String TensParser(short inputNombre);
-	protected abstract String HundredParser(short inputNombre);
-
-	
-	
+	protected abstract String HundredParser(short inputNombre);	
 }
 /*
  * int 2 147 483 647 : 2 milliard => 10^9
