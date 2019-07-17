@@ -17,7 +17,7 @@ public class GenEn extends NumToLet {
 		htbl.put(90, "Ninety"); htbl.put(80, "Eighty");  
 		String ScNombre [] = {""," Thousand"," Million"," Milliard", " Billion"," Billiard"," Trillion", " Trilliard"}; 
 	
-		Init(htbl, ScNombre,"and");
+		Init(htbl, ScNombre,",");
 	}
 	/*
 	 * function BasicParser : that take short as Input
@@ -47,9 +47,8 @@ public class GenEn extends NumToLet {
 	protected String HundredParser(short inputNombre) {
 		byte innerVal = (byte)(inputNombre / 100) ;
 		String str = "";
-		if ( innerVal != 0 ) {
-			if (innerVal != 1) 
-				str = str.concat( get( innerVal ) );
+		if ( innerVal != 0 ) { 
+			str = str.concat( get( innerVal ) );
 			str = str.concat(
 					((Color)?ColorAnsi[0]:"").concat(" Hundred ").concat(
 					(Color)?ColorAnsi[ColorAnsi.length-1]:""));
@@ -71,26 +70,15 @@ public class GenEn extends NumToLet {
 		if ( innerVal >=0 && innerVal <= 20 ) {
 			str = str.concat( get( innerVal ) );
 		// Second Sénario 
-		}else if ( (innerVal>=21 && innerVal<= 69) || (innerVal>=80 && innerVal<= 89)) {
+		}else if ( (innerVal>=21 && innerVal<= 99)) {
 			unit = (byte) (innerVal % 10) ;
 			innerVal = (byte) (innerVal - unit) ;
 			str = str.concat( get( innerVal ) );
 
 			if( unit != 0 ) {
-				if ( unit == 1 ) str = str.concat( this.link );
-				else str = str.concat("-");
+				str = str.concat("-");
 				str = str.concat( get( unit ) );
 			}
-		// Third Sénario	
-		}else if ( (innerVal>=70 && innerVal<= 79) || (innerVal>=90 && innerVal<= 99)) { 
-			unit = (byte) ((innerVal % 10 )+10);
-			innerVal = (byte) (innerVal - unit) ;
-			
-			str = str.concat( get( innerVal ) ); 
-			if ( unit == 11 ) str = str.concat( this.link );
-			else str = str.concat("-");
-			str = str.concat( get( unit ) );
-			
 		}
 		return str ;
 	}
