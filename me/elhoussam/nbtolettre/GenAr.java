@@ -5,18 +5,18 @@ import java.util.Hashtable;
 public class GenAr extends NumToLet {
 	public GenAr() {
 		Hashtable<Integer, String> htbl = new Hashtable<Integer, String>();
-		htbl.put(0,"Z�ro"); htbl.put(1,"Un"); htbl.put(2, "Deux"); 
-		htbl.put(3, "Trois"); htbl.put(4, "Quatre"); htbl.put(5, "Cinq"); 
-		htbl.put(6, "Six"); htbl.put(7, "Sept"); htbl.put(8, "Huit"); 
-		htbl.put(9, "Neuf"); htbl.put(10, "Dix"); htbl.put(11, "Onze"); 
-		htbl.put(12, "Douze"); htbl.put(13, "Treize"); htbl.put(14, "Quatorze"); 
-		htbl.put(15, "Quinze"); htbl.put(16, "Seize"); htbl.put(17, "Dix-Sept"); 
-		htbl.put(18, "Dix-Huit"); htbl.put(19, "Dix-Neuf"); htbl.put(20, "Vingt"); 
-		htbl.put(30, "Trente"); htbl.put(40, "Quarante"); htbl.put(50, "Cinquante"); 
-		htbl.put(60, "Soixante"); htbl.put(80, "Quatre Vingt");  
-		String ScNombre [] = {"","Mille","Million","Milliard", "Billion","Billiard","Trillion", "Trilliard"}; 
+		htbl.put(0,"صفر"); htbl.put(1,"واحد"); htbl.put(2, "اثنين"); 
+		htbl.put(3, "ثلاثة"); htbl.put(4, "اربعة"); htbl.put(5, "خمسة"); 
+		htbl.put(6, "ستة"); htbl.put(7, "سبعة"); htbl.put(8, "ثمانية"); 
+		htbl.put(9, "تسعة"); htbl.put(10, "عشرة"); htbl.put(11, "احد عشر"); 
+		htbl.put(12, "اثنتي عشر"); htbl.put(13, "ثلاثة عشر"); htbl.put(14, "اربعة عشر"); 
+		htbl.put(15, "خمسة عشر"); htbl.put(16, "ستة عشر"); htbl.put(17, "سبعة عشر"); 
+		htbl.put(18, "ثمانية عشر"); htbl.put(19, "تسعة عشر"); htbl.put(20, "عشرون"); 
+		htbl.put(30, "ثلاثون"); htbl.put(40, "اربعون"); htbl.put(50, "خمسون"); 
+		htbl.put(60, "ستون"); htbl.put(80, "ثمانون");  
+		String ScNombre [] = {"","آلف","مليون","مليار", "بليون","بليار","ترليون", "ترليار"}; 
 	
-		Init(htbl, ScNombre,"et");
+		Init(htbl, ScNombre,"و");
 	}
 	/*
 	 * function BasicParser : that take short as Input
@@ -50,7 +50,7 @@ public class GenAr extends NumToLet {
 			if (innerVal != 1) 
 				str = str.concat( get( innerVal )+space );
 			str = str.concat(
-					((Color)?ColorAnsi[0]:"").concat("Cent"+space).concat(
+					((Color)?ColorAnsi[0]:"").concat("مائة"+space).concat(
 					(Color)?ColorAnsi[ColorAnsi.length-1]:""));
 			
 		}
@@ -66,10 +66,10 @@ public class GenAr extends NumToLet {
 	protected String TensParser(short inputNombre) {
 		byte innerVal = (byte) inputNombre, unit ;
 		String str = "";
-		 // First S�nario
+		 // First Sénario
 		if ( innerVal >=0 && innerVal <= 20 ) {
 			str = str.concat( get( innerVal ) );
-		// Second S�nario 
+		// Second Sénario 
 		}else if ( (innerVal>=21 && innerVal<= 69) || (innerVal>=80 && innerVal<= 89)) {
 			unit = (byte) (innerVal % 10) ;
 			innerVal = (byte) (innerVal - unit) ;
@@ -80,14 +80,14 @@ public class GenAr extends NumToLet {
 				else str = str.concat("-");
 				str = str.concat( get( unit ) );
 			}
-		// Third S�nario	
+		// Third Sénario	
 		}else if ( (innerVal>=70 && innerVal<= 79) || (innerVal>=90 && innerVal<= 99)) { 
 			unit = (byte) ((innerVal % 10 )+10);
 			innerVal = (byte) (innerVal - unit) ;
 			
 			str = str.concat( get( innerVal ) ); 
 			if ( unit == 11 ) str = str.concat(link+space);
-			else str = str.concat("-");
+			else str = str.concat(link+space);
 			str = str.concat( get( unit ) );
 			
 		}
