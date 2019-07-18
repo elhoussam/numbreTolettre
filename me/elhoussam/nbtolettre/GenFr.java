@@ -14,7 +14,7 @@ public class GenFr extends NumToLet {
 		htbl.put(18, "Dix-Huit"); htbl.put(19, "Dix-Neuf"); htbl.put(20, "Vingt"); 
 		htbl.put(30, "Trente"); htbl.put(40, "Quarante"); htbl.put(50, "Cinquante"); 
 		htbl.put(60, "Soixante"); htbl.put(80, "Quatre Vingt");  
-		String ScNombre [] = {""," Mille"," Million"," Milliard", " Billion"," Billiard"," Trillion", " Trilliard"}; 
+		String ScNombre [] = {"","Mille","Million","Milliard", "Billion","Billiard","Trillion", "Trilliard"}; 
 	
 		Init(htbl, ScNombre,"et");
 	}
@@ -48,9 +48,9 @@ public class GenFr extends NumToLet {
 		String str = "";
 		if ( innerVal != 0 ) {
 			if (innerVal != 1) 
-				str = str.concat( get( innerVal ) );
+				str = str.concat( get( innerVal )+space );
 			str = str.concat(
-					((Color)?ColorAnsi[0]:"").concat(" Cent ").concat(
+					((Color)?ColorAnsi[0]:"").concat("Cent"+space).concat(
 					(Color)?ColorAnsi[ColorAnsi.length-1]:""));
 			
 		}
@@ -76,7 +76,7 @@ public class GenFr extends NumToLet {
 			str = str.concat( get( innerVal ) );
 
 			if( unit != 0 ) {
-				if ( unit == 1 ) str = str.concat(" et ");
+				if ( unit == 1 ) str = str.concat(link+space);
 				else str = str.concat("-");
 				str = str.concat( get( unit ) );
 			}
@@ -86,7 +86,7 @@ public class GenFr extends NumToLet {
 			innerVal = (byte) (innerVal - unit) ;
 			
 			str = str.concat( get( innerVal ) ); 
-			if ( unit == 11 ) str = str.concat(" et ");
+			if ( unit == 11 ) str = str.concat(link+space);
 			else str = str.concat("-");
 			str = str.concat( get( unit ) );
 			

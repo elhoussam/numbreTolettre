@@ -7,16 +7,14 @@ public class Main {
 	public static void main(String argv[]) throws Exception{
 		NumToLet obj ;
 		long a = 1 ;
-		while ( a >= 0) {
+		while ( true ) {
 		
 		a = NumToLet.ScanInput();
 		obj= new GenEn(); 	print("En : "); obj.Generate( a ); print("\n");
 		obj= new GenFr(); 	print("FR : ");	obj.Generate( a ); print("\n");
-		//sc.close();
 		ToggleColor();
-		print("\n");
+		
 		}
-		print ("End.\n");
 		
 	}
 	

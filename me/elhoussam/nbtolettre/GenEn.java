@@ -15,7 +15,7 @@ public class GenEn extends NumToLet {
 		htbl.put(30, "Thirty"); htbl.put(40, "Forty"); htbl.put(50, "Fifty"); 
 		htbl.put(60, "Sixty"); htbl.put(70, "Seventy");  
 		htbl.put(90, "Ninety"); htbl.put(80, "Eighty");  
-		String ScNombre [] = {""," Thousand"," Million"," Milliard", " Billion"," Billiard"," Trillion", " Trilliard"}; 
+		String ScNombre [] = {"","Thousand","Million","Milliard", "Billion","Billiard","Trillion", "Trilliard"}; 
 	
 		Init(htbl, ScNombre,",");
 	}
@@ -30,11 +30,11 @@ public class GenEn extends NumToLet {
 		short innerValue = inputNombre ;
 		String innerStr = "";
 		// Starting with hundred part of number
-		innerStr = innerStr.concat( HundredParser( innerValue ) ) ;
+		innerStr = innerStr.concat( HundredParser( innerValue )) ;
 		innerValue%=100;
 		// Completing with Tens part of the number
 		if (  inputNombre/100 == 0 || innerValue != 0  ) 
-			innerStr = innerStr.concat( TensParser( innerValue  ) );
+			innerStr = innerStr.concat( TensParser( innerValue) );
 		return innerStr ;	
 	}
 	/*
@@ -48,9 +48,9 @@ public class GenEn extends NumToLet {
 		byte innerVal = (byte)(inputNombre / 100) ;
 		String str = "";
 		if ( innerVal != 0 ) { 
-			str = str.concat( get( innerVal ) );
+			str = str.concat( get( innerVal )+space );
 			str = str.concat(
-					((Color)?ColorAnsi[0]:"").concat(" Hundred ").concat(
+					((Color)?ColorAnsi[0]:"").concat("Hundred"+space).concat(
 					(Color)?ColorAnsi[ColorAnsi.length-1]:""));
 			
 		}

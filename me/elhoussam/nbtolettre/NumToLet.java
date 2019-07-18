@@ -1,11 +1,11 @@
 package me.elhoussam.nbtolettre;
-import static me.elhoussam.nbtolettre.NumToLet.print;
 
 import java.util.Hashtable;
 import java.util.Scanner;
 
 public abstract class NumToLet {
 	static Boolean Color = false;
+	static String space = " ";
 	protected String link;
 	protected Hashtable<Integer, String> BasicNumber = null; 
 	protected String ScaleNombre[]		= null ;
@@ -14,16 +14,16 @@ public abstract class NumToLet {
 	protected void Init( Hashtable<Integer, String> ht, String scalenombre[], String Link) {
 		BasicNumber = (Hashtable<Integer, String>) ht.clone();
 		ScaleNombre = scalenombre.clone() ;
-		link = (  Link.toString()).concat(" ");
+		link = Link.toString();
 	}	
 	public static Long ScanInput() {
 		Scanner sc  = new Scanner(System.in);
 		Long a = 0L ; Boolean checker= false ;
 		while( !checker ) {
-			try{print("Number : "); a = sc.nextLong() ; 
+			try{print("# Number : "); a = sc.nextLong() ; 
 			checker=(a<0)?false:true;
-			print((!checker)?ColorAnsi[0]+"should be greater then or equal zero\n"+ColorAnsi[ColorAnsi.length-1]:"" );
-			}catch(Exception e ){ sc.next(); print(ColorAnsi[3]+"this number is too long\n"+ColorAnsi[ColorAnsi.length-1]);	}
+			print((!checker)?ColorAnsi[0]+"\tshould be greater then or equal zero\n"+ColorAnsi[ColorAnsi.length-1]:"" );
+			}catch(Exception e ){ sc.next(); print(ColorAnsi[3]+"\tthis number is too long\n"+ColorAnsi[ColorAnsi.length-1]);	}
 		}
 		return a;
 	}
@@ -74,9 +74,8 @@ public abstract class NumToLet {
 				if ( counter > 0 )
 					localstr = this.link ; // if en => and , fr => et
 					innerStr = (
-							((o.nb==1 && o.str.contains(ScaleNombre[1]))?"":BasicParser(o.nb) ) // to prevent the one hundred, On Thousand
-							.concat( o.str )
-							+localstr+innerStr);
+							((o.nb==1 && o.str.contains(ScaleNombre[1]))?"":BasicParser(o.nb)+space ) // to prevent the one hundred, On Thousand
+							.concat( o.str )+space +localstr+space+innerStr);
 					counter++;
 			}i++;
 			innerVal = innerVal / 1000;
