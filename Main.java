@@ -10,8 +10,8 @@ public class Main {
 		while ( a >= 0) {
 		
 		a = NumToLet.ScanInput();
-		obj= new GenEn(); 	obj.Generate( a );
-		//obj= new GenFr(); 		obj.Generate( a );
+		obj= new GenEn(); 	print("En : "); obj.Generate( a ); print("\n");
+		obj= new GenFr(); 	print("FR : ");	obj.Generate( a ); print("\n");
 		//sc.close();
 		ToggleColor();
 		print("\n");

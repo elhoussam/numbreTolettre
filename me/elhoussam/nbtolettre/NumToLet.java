@@ -14,7 +14,7 @@ public abstract class NumToLet {
 	protected void Init( Hashtable<Integer, String> ht, String scalenombre[], String Link) {
 		BasicNumber = (Hashtable<Integer, String>) ht.clone();
 		ScaleNombre = scalenombre.clone() ;
-		link = (" ".concat( Link.toString())).concat(" ");
+		link = (  Link.toString()).concat(" ");
 	}	
 	public static Long ScanInput() {
 		Scanner sc  = new Scanner(System.in);
@@ -73,7 +73,9 @@ public abstract class NumToLet {
 				String localstr="";
 				if ( counter > 0 )
 					localstr = this.link ; // if en => and , fr => et
-					innerStr = (BasicParser( o.nb ).toString().concat( o.str )
+					innerStr = (
+							((o.nb==1 && o.str.contains(ScaleNombre[1]))?"":BasicParser(o.nb) ) // to prevent the one hundred, On Thousand
+							.concat( o.str )
 							+localstr+innerStr);
 					counter++;
 			}i++;
