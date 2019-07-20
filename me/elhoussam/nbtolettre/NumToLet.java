@@ -32,8 +32,9 @@ public abstract class NumToLet {
 		return s ;
 	}
 	
-	public static void ToggleColor() {
+	public static boolean ToggleColor() {
 		Color = ! Color ;
+		return Color ;
 	}
 	// Print function that simply print str in the console
 	public static void print( Object obj ) {
@@ -55,7 +56,7 @@ public abstract class NumToLet {
 	 * 	smaller pieces with it scale int NB's Objects
 	 * 
 	 * */
-	public void Generate(long InputNombre){
+	public String Generate(long InputNombre){
 		long innerVal =  InputNombre ; 
 		byte i=0, counter =0;
 		String innerStr = "";
@@ -80,8 +81,10 @@ public abstract class NumToLet {
 			}i++;
 			innerVal = innerVal / 1000;
 		}
-		// print the result 
-		print( (InputNombre != 0)? innerStr : TensParser( (short) innerVal ) );
+		// print the result
+		String finalresult = (InputNombre != 0)? innerStr : TensParser( (short) innerVal ) ;
+		print( finalresult );
+		return finalresult;
 	}
 	protected abstract String BasicParser( short inputNombre );
 	protected abstract String TensParser(short inputNombre);
