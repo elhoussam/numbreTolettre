@@ -36,8 +36,13 @@ public class GenAr extends NumToLet {
 				localstr = this.link ; // if en => and , fr => et
 				if( o.nb == 2 ) o.str = o.str.concat("ان");
 				else if( o.nb == 10 ) {
-					 String arr [] = {"","آلاف","ملايين","ملايير", "بلايين","بلايير","ترليونات", "ترليارات"};
-					 this.setScale(arr  ) ; 
+					//o.str = ()	"" , 
+					String arr [] = {"","آلاف","ملايين","ملايير", "بلايين","بلايير","ترليونات", "ترليارات"};
+					// this.setScale(arr  ) ;
+					byte localIndex = (IndexOf(ScaleNombre,o.str));
+					
+					o.str =(localIndex!=-1)?arr[ localIndex ]:o.str;
+						
 					 // this statment does not affect the result because 
 					 // the o.str aready has value from the last scale
 				}
@@ -50,8 +55,16 @@ public class GenAr extends NumToLet {
 		}
 		return mystr;
 	}
-	private void setScale( String arr []) {
-		this.ScaleNombre = arr ;
+	private byte IndexOf( String arr[],String val) {
+		String local = val; // insert code here
+		byte index = -1;
+				for (byte i=0;i<arr.length;i++) {
+				    if (arr[i].equals(local)) {
+				        index = i;
+				        break;
+				    }
+				}
+		return index ;
 	}
 	/*
 	 * function BasicParser : that take short as Input
