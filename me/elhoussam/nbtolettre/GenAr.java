@@ -32,7 +32,7 @@ public class GenAr extends NumToLet {
 		for(byte i=0; i < InputVec.size() ; i++) {
 			String localstr="";
 			NB o = InputVec.get(i) ;
-			if ( i > 0 ) {
+			if ( !o.str.equals("") ) {
 				localstr = this.link ; // if en => and , fr => et
 				if( o.nb == 2 ) o.str = o.str.concat("ان");
 				else if( o.nb == 10 ) {
@@ -42,8 +42,9 @@ public class GenAr extends NumToLet {
 					 // the o.str aready has value from the last scale
 				}
 			}	
-			mystr =	 ((o.str)+space +localstr+space).concat(mystr) ;
-			mystr = ( ( (o.nb == 2 && i>0) || (o.nb==1 && i>0) )?
+			mystr =	 (!mystr.isEmpty())?(localstr+space).concat(mystr):"";
+			mystr =	 ((o.str)+space).concat(mystr) ;
+			mystr = (( !o.str.equals("") && (o.nb == 1 || o.nb == 2 ))?
 					"":BasicParser(o.nb)+space ).concat(mystr) ; // to prevent the one hundred, On Thousand
 			
 		}
