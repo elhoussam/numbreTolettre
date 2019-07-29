@@ -68,7 +68,7 @@ public class GenFr extends NumToLet {
 		String str = "";
 		 // First Sénario
 		if ( innerVal >=0 && innerVal <= 20 ) {
-			str = str.concat( get( innerVal ) );
+			str = str.concat( get( innerVal )+space );
 		// Second Sénario 
 		}else if ( (innerVal>=21 && innerVal<= 69) || (innerVal>=80 && innerVal<= 89)) {
 			unit = (byte) (innerVal % 10) ;
@@ -76,9 +76,9 @@ public class GenFr extends NumToLet {
 			str = str.concat( get( innerVal ) );
 
 			if( unit != 0 ) {
-				if ( unit == 1 ) str = str.concat(link+space);
+				if ( unit == 1 ) str = str.concat(space+link+space);
 				else str = str.concat("-");
-				str = str.concat( get( unit ) );
+				str = str.concat( get( unit )+space );
 			}
 		// Third Sénario	
 		}else if ( (innerVal>=70 && innerVal<= 79) || (innerVal>=90 && innerVal<= 99)) { 
@@ -86,9 +86,9 @@ public class GenFr extends NumToLet {
 			innerVal = (byte) (innerVal - unit) ;
 			
 			str = str.concat( get( innerVal ) ); 
-			if ( unit == 11 ) str = str.concat(link+space);
+			if ( unit == 11 ) str = str.concat(space+link+space);
 			else str = str.concat("-");
-			str = str.concat( get( unit ) );
+			str = str.concat( get( unit )+space );
 			
 		}
 		return str ;

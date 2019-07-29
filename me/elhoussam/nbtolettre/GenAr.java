@@ -1,21 +1,12 @@
 package me.elhoussam.nbtolettre;
 
 import java.util.Hashtable;
+import java.util.Vector;
+
+import me.elhoussam.nbtolettre.NumToLet.NB;
 
 public class GenAr extends NumToLet {
-	/*
-	 * Test function : to change change the output of super.generate
-	 * */
-	public String Generate(long InputNombre) {
-		String str = super.Generate(InputNombre);
-		print("\n");
-		String arr[] = str.split(" ");
-		/*
-		for( byte i = 0 ;i < (byte) (arr.length) ; i++)
-			print( arr[i] +"\n" );			
-		*/
-		return str;
-	}
+
 	public GenAr() {
 		Hashtable<Integer, String> htbl = new Hashtable<Integer, String>();
 		htbl.put(0,"صفر"); htbl.put(1,"واحد"); htbl.put(2, "اثنين"); 
@@ -33,6 +24,35 @@ public class GenAr extends NumToLet {
 		Init(htbl, ScNombre,"و");
 	}
 	/*
+	 * 
+	 * */
+	protected String Constructor(Vector<NB> InputVec) {
+		//print("GenAr : Constructor\n");
+		String mystr = "";
+		for(byte i=0; i < InputVec.size() ; i++) {
+			String localstr="";
+			NB o = InputVec.get(i) ;
+			if ( i > 0 ) {
+				localstr = this.link ; // if en => and , fr => et
+				if( o.nb == 2 ) o.str = o.str.concat("ان");
+				else if( o.nb == 10 ) {
+					 String arr [] = {"","آلاف","ملايين","ملايير", "بلايين","بلايير","ترليونات", "ترليارات"};
+					 this.setScale(arr  ) ; 
+					 // this statment does not affect the result because 
+					 // the o.str aready has value from the last scale
+				}
+			}	
+			mystr =	 ((o.str)+space +localstr+space).concat(mystr) ;
+			mystr = ( ( (o.nb == 2 && i>0) || (o.nb==1 && i>0) )?
+					"":BasicParser(o.nb)+space ).concat(mystr) ; // to prevent the one hundred, On Thousand
+			
+		}
+		return mystr;
+	}
+	private void setScale( String arr []) {
+		this.ScaleNombre = arr ;
+	}
+	/*
 	 * function BasicParser : that take short as Input
 	 * 				then generate the string that corresponding 
 	 * 				to the Input, finally print the letter
@@ -47,7 +67,7 @@ public class GenAr extends NumToLet {
 		innerValue%=100;
 		// Completing with Tens part of the number
 		if (  inputNombre/100 == 0 || innerValue != 0  ) 
-			innerStr = innerStr.concat( link+space+TensParser( innerValue  ) );
+			innerStr = innerStr.concat(TensParser( innerValue  ) );
 		return innerStr ;	
 	}
 	/*
@@ -61,11 +81,16 @@ public class GenAr extends NumToLet {
 		byte innerVal = (byte)(inputNombre / 100) ;
 		String str = "";
 		if ( innerVal != 0 ) {
-			if (innerVal != 1) 
+			if (innerVal != 1 && innerVal !=2) // innerVal > 2 
 				str = str.concat( get( innerVal )+space );
+			
+			String localstr = "مئتان";	// handler of 200
+			if(innerVal != 2) localstr =  "مائة";
 			str = str.concat(
-					((Color)?ColorAnsi[0]:"").concat("مائة"+space).concat(
-					(Color)?ColorAnsi[ColorAnsi.length-1]:""));
+					((Color)?ColorAnsi[0]:"")
+					.concat(localstr+space)
+					.concat((inputNombre%100>0)?link+space:"" ) 
+					.concat((Color)?ColorAnsi[ColorAnsi.length-1]:""));
 			
 		}
 		return str ;

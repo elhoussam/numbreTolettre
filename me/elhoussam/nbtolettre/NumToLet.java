@@ -2,13 +2,14 @@ package me.elhoussam.nbtolettre;
 
 import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.Vector;
 
 public abstract class NumToLet {
 	static Boolean Color = false;
 	static String space = " ";
 	protected String link;
 	protected Hashtable<Integer, String> BasicNumber = null; 
-	protected String ScaleNombre[]		= null ;
+	protected String ScaleNombre[] = null ;
 	static String ColorAnsi[]= {"\u001B[31m","\u001B[32m","\u001B[33m","\u001B[34m","\u001B[35m","\u001B[36m","\u001B[38m","\u001B[0m" };
 	@SuppressWarnings("unchecked")
 	protected void Init( Hashtable<Integer, String> ht, String scalenombre[], String Link) {
@@ -22,9 +23,11 @@ public abstract class NumToLet {
 		while( !checker ) {
 			try{print("# Number : "); a = sc.nextLong() ; 
 			checker=(a<0)?false:true;
+			
 			print((!checker)?ColorAnsi[0]+"\tshould be greater then or equal zero\n"+ColorAnsi[ColorAnsi.length-1]:"" );
 			}catch(Exception e ){ sc.next(); print(ColorAnsi[3]+"\tthis number is too long\n"+ColorAnsi[ColorAnsi.length-1]);	}
 		}
+		//sc.next();
 		return a;
 	}
 	protected String get(byte i) {
@@ -52,16 +55,13 @@ public abstract class NumToLet {
 
 	}
 	/*
-	 * Generate Function : start devide the number and store into
-	 * 	smaller pieces with it scale int NB's Objects
 	 * 
 	 * */
-	public String Generate(long InputNombre){
+	protected Vector<NB> Extractor(long InputNombre){
+		Vector<NB> myvec = new Vector<NB>();
 		long innerVal =  InputNombre ; 
-		byte i=0, counter =0;
-		String innerStr = "";
-		// the 1st part dividing the number and store it in NB 
-		while ( innerVal > 0 ) {
+		byte i=0;
+		while( innerVal > 0 ){
 			short localvar = (short) (innerVal % 1000) ;
 			if ( localvar > 0 ){
 				// parsing the differente part of the numbre
@@ -70,21 +70,51 @@ public abstract class NumToLet {
 			    	ScaleNombre[i]).concat(
 			    	(Color)?ColorAnsi[ColorAnsi.length-1]:"") 
 			    	); 
-			    // constructing part of the numbre
-				String localstr="";
-				if ( counter > 0 )
-					localstr = this.link ; // if en => and , fr => et
-					innerStr = (
-							((o.nb==1 && o.str.contains(ScaleNombre[1]))?"":BasicParser(o.nb)+space ) // to prevent the one hundred, On Thousand
-							.concat( o.str )+space +localstr+space+innerStr);
-					counter++;
+				myvec.add(o);
 			}i++;
 			innerVal = innerVal / 1000;
 		}
-		// print the result
-		String finalresult = (InputNombre != 0)? innerStr : TensParser( (short) innerVal ) ;
-		print( finalresult );
+		return myvec;
+	}
+	/*
+	 * 
+	 * */
+	protected String Constructor(Vector<NB> InputVec) {
+		//print("NumTo : Constructor");
+
+		String mystr = "";
+		for(byte i=0; i < InputVec.size() ; i++) {
+			String localstr="";
+			if ( i > 0 )
+				localstr = this.link ; // if en => and , fr => et
+			NB o = InputVec.get(i) ;
+			mystr = (
+					((o.nb==1 && o.str.contains(ScaleNombre[1]))?
+							"":BasicParser(o.nb)+space ) // to prevent the one hundred, On Thousand
+					.concat( o.str )+space +localstr+space+mystr
+					);
+			
+			//print(InputVec.get(i).nb+"\n");
+		}
+		return mystr;
+	}
+	/*
+	 * Generate Function : start devide the number and store into
+	 * 	smaller pieces with it scale int NB's Objects
+	 * 
+	 * */
+	public String Generate(long InputNombre){
+		String innerStr = ( this.Constructor( Extractor( InputNombre ) ) );
+		String finalresult = RemoveDoubleSpaces( (InputNombre != 0)? innerStr : TensParser( (short) InputNombre )) ;
+		print( "["+finalresult+"]" );
 		return finalresult;
+	}
+	private String RemoveDoubleSpaces(String input) {
+		String localString = input.trim();
+		while( localString.contains("  ") ) {
+			localString = localString.replaceFirst("  "," ");
+		}
+		return localString ;
 	}
 	protected abstract String BasicParser( short inputNombre );
 	protected abstract String TensParser(short inputNombre);
