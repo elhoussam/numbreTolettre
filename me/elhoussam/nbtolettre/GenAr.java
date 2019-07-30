@@ -3,8 +3,6 @@ package me.elhoussam.nbtolettre;
 import java.util.Hashtable;
 import java.util.Vector;
 
-import me.elhoussam.nbtolettre.NumToLet.NB;
-
 public class GenAr extends NumToLet {
 
 	public GenAr() {
@@ -135,6 +133,12 @@ public class GenAr extends NumToLet {
 
 		}
 		return str ;
+	}
+	
+	public static boolean ToggleColor() {
+		//Color = ! Color ;
+		print("Toggle Color is not support with arabic generator\n");
+		return Color ;
 	}
 
 }
