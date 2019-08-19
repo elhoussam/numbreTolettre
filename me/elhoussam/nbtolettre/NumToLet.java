@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public abstract class NumToLet {
-	static Boolean Color = false;
+	Boolean Color = false;
 	static String space = " ";
 	protected String link;
 	protected Hashtable<Integer, String> BasicNumber = null; 
@@ -43,7 +43,7 @@ public abstract class NumToLet {
 	/*
 	 * ToggleColor : to activate color feature in output
 	 * */
-	public static boolean ToggleColor() {
+	public boolean ToggleColor() {
 		Color = ! Color ;
 		return Color ;
 	}

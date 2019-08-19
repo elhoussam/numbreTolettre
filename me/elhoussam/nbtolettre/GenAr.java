@@ -4,7 +4,7 @@ import java.util.Hashtable;
 import java.util.Vector;
 
 public class GenAr extends NumToLet {
-
+     
 	public GenAr() {
 		Hashtable<Integer, String> htbl = new Hashtable<Integer, String>();
 		htbl.put(0,"صفر"); htbl.put(1,"واحد"); htbl.put(2, "اثنين"); 
@@ -33,11 +33,11 @@ public class GenAr extends NumToLet {
 			if ( !o.str.equals("") ) {
 				localstr = this.link ; // if en => and , fr => et
 				if( o.nb == 2 ) o.str = o.str.concat("ان");
-				else if( o.nb == 10 ) {
+				else if( o.nb == 10 || (o.nb>3 && o.nb<10 && o.str.equalsIgnoreCase("آلف") ) ) {
 					//o.str = ()	"" , 
 					String arr [] = {"","آلاف","ملايين","ملايير", "بلايين","بلايير","ترليونات", "ترليارات"};
 					// this.setScale(arr  ) ;
-					byte localIndex = (IndexOf(ScaleNombre,o.str));
+					byte localIndex = (IndexOf(ScaleNombre,o.str)); // IndexOf is local method
 					
 					o.str =(localIndex!=-1)?arr[ localIndex ]:o.str;
 						
@@ -134,9 +134,9 @@ public class GenAr extends NumToLet {
 		}
 		return str ;
 	}
-	
-	public static boolean ToggleColor() {
-		//Color = ! Color ;
+	@Override
+	public boolean ToggleColor() {
+		Color = false ;
 		print("Toggle Color is not support with arabic generator\n");
 		return Color ;
 	}

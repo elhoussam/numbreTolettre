@@ -14,9 +14,9 @@ public class Main {
 		while ( true ) {
 		String aa = "";
 		a = NumToLet.ScanInput();
-		obj= new GenEn(); 	print("En : ");  aa =obj.Generate( a ); print("\n");
+		//obj= new GenEn(); 	print("En : ");  aa =obj.Generate( a ); print("\n");
 		//obj= new GenFr(); 	print("FR : ");	aa =obj.Generate( a ); print("\n");
-		//obj= new GenAr(); 	print("Ar : ");	aa = obj.Generate( a ); print("\n");
+		obj= new GenAr(); 	print("Ar : ");	aa = obj.Generate( a ); print("\n");
 		aa = aa.trim() ;
 		obj.ToggleColor();
 		
