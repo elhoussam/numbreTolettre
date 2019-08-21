@@ -76,9 +76,9 @@ public class SampleController implements Initializable {
 	 * when i export the RunnableJar file  
 	 * */
 	private ImageView getImageView( String path ) {
-		ImageView   a = new ImageView();
 		// i used only the path = "icon/mypic.png"
 		// because i refer to the parent folder as resource in eclipse settings
+		ImageView   a = new ImageView();
 		Image img = new Image( getClass().getClassLoader().getResource(path).toString() );
 		a.setImage(img);
 		return a ;
