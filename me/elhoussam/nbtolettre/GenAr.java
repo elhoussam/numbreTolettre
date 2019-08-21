@@ -33,7 +33,7 @@ public class GenAr extends NumToLet {
 			if ( !o.str.equals("") ) {
 				localstr = this.link ; // if en => and , fr => et
 				if( o.nb == 2 ) o.str = o.str.concat("ان");
-				else if( o.nb == 10 || (o.nb>3 && o.nb<10 && o.str.equalsIgnoreCase("آلف") ) ) {
+				else if( o.nb == 10 || (o.nb>=3 && o.nb<10 && o.str.equalsIgnoreCase("آلف") ) ) {
 					//o.str = ()	"" , 
 					String arr [] = {"","آلاف","ملايين","ملايير", "بلايين","بلايير","ترليونات", "ترليارات"};
 					// this.setScale(arr  ) ;
