@@ -9,4 +9,4 @@ Hint
 * input must be in this intervalle : [0, Long.MAX_VALUE]
 * you can switch ON/OFF colored output from ToggleColor()
 
-![alt text](img.png)
+![alt text](doc/img.png)
