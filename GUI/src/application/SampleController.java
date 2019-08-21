@@ -70,7 +70,11 @@ public class SampleController implements Initializable {
 		lblen.setGraphic(getImageView("icon/en.png")  );
 		
 	}
- 
+ 	/*
+	 * This main functionality of 
+	 * this method to show the picture
+	 * when i export the RunnableJar file  
+	 * */
 	private ImageView getImageView( String path ) {
 		ImageView   a = new ImageView();
 		// i used only the path = "icon/mypic.png"
