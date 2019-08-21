@@ -18,3 +18,6 @@ User Interface
 ![alt text](doc/doc_ar.png)
 ![alt text](doc/doc_en.png)
 ![alt text](doc/doc_fr.png)
+![alt text](doc/doc_err.png)
+
+notice this project is open for any contribution
