@@ -17,7 +17,7 @@ public class GenEn extends NumToLet {
 		htbl.put(90, "Ninety"); htbl.put(80, "Eighty");  
 		String ScNombre [] = {"","Thousand","Million","Milliard", "Billion","Billiard","Trillion", "Trilliard"}; 
 	
-		Init(htbl, ScNombre,",");
+		Init(htbl, ScNombre,"and");
 	}
 	/*
 	 * function BasicParser : that take short as Input
@@ -33,8 +33,8 @@ public class GenEn extends NumToLet {
 		innerStr = innerStr.concat( HundredParser( innerValue )) ;
 		innerValue%=100;
 		// Completing with Tens part of the number
-		if (  inputNombre/100 == 0 || innerValue != 0  ) 
-			innerStr = innerStr.concat( TensParser( innerValue) );
+		if ( innerValue != 0  ) 
+			innerStr = innerStr.concat( this.link+space+ TensParser( innerValue ) );
 		return innerStr ;	
 	}
 	/*
