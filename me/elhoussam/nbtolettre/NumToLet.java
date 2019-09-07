@@ -2,7 +2,7 @@ package me.elhoussam.nbtolettre;
 
 import java.util.Hashtable;
 import java.util.Scanner;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public abstract class NumToLet {
 	Boolean Color = false;
@@ -67,8 +67,8 @@ public abstract class NumToLet {
 	 * 			that generating vector from a giving input nombre
 	 * 			by dividing the input number into elementary number 
 	 * */
-	protected Vector<NB> Extractor(long InputNombre){
-		Vector<NB> myvec = new Vector<NB>();
+	protected ArrayList<NB> Extractor(long InputNombre){
+		ArrayList<NB> myvec = new ArrayList<NB>();
 		long innerVal =  InputNombre ; 
 		byte i=0;
 		while( innerVal > 0 ){
@@ -91,7 +91,7 @@ public abstract class NumToLet {
 	 * 				and start generating the corresponding string
 	 * 				with the giving vector
 	 * */
-	protected String Constructor(Vector<NB> InputVec) {
+	protected String Constructor(ArrayList<NB> InputVec) {
 		//print("NumTo : Constructor");
 		String mystr = "";
 		for(byte i=0; i < InputVec.size() ; i++) {
