@@ -16,7 +16,7 @@ public class GenFr extends NumToLet {
 		htbl.put(60, "Soixante"); htbl.put(80, "Quatre Vingt");  
 		String ScNombre [] = {"","Mille","Million","Milliard", "Billion","Billiard","Trillion", "Trilliard"}; 
 	
-		Init(htbl, ScNombre,"et");
+		Init(htbl, ScNombre,"");
 	}
 	/*
 	 * function BasicParser : that take short as Input

@@ -34,7 +34,7 @@ public class GenEn extends NumToLet {
 		innerValue%=100;
 		// Completing with Tens part of the number
 		if ( inputNombre/100 != 0 && innerValue != 0) innerStr = innerStr.concat(this.link+space);
-		if ( innerValue != 0  ) innerStr = innerStr.concat(  TensParser( innerValue ) );
+		if (  inputNombre/100 == 0 || innerValue != 0  ) innerStr = innerStr.concat(  TensParser( innerValue ) );
 		return innerStr ;	
 	}
 	/*

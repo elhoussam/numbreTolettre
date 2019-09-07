@@ -1,7 +1,7 @@
 package me.elhoussam.nbtolettre;
 
 import java.util.Hashtable;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public class GenAr extends NumToLet {
      
@@ -24,7 +24,7 @@ public class GenAr extends NumToLet {
 	/*
 	 * 
 	 * */
-	protected String Constructor(Vector<NB> InputVec) {
+	protected String Constructor(ArrayList<NB> InputVec) {
 		//print("GenAr : Constructor\n");
 		String mystr = "";
 		for(byte i=0; i < InputVec.size() ; i++) {
