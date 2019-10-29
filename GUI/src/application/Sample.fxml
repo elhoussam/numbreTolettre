@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -11,12 +12,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="0.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<BorderPane prefHeight="243.0" prefWidth="500" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <center>
-      <VBox prefHeight="32.0" prefWidth="371.0" spacing="5.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="32.0" prefWidth="300" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="TOP_CENTER" prefWidth="355.0" spacing="40.0">
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200" spacing="10.0">
                <children>
+                  <Label fx:id="lblind" onMouseClicked="#GeneratorInd">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../res/icon/ind.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Indian" />
+                     </tooltip>
+                  </Label> 
                   <Label fx:id="lblen" onMouseClicked="#GeneratorEn">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
@@ -25,15 +38,21 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="English" />
+                     </tooltip>
                   </Label>
                   <Label fx:id="lblar" onMouseClicked="#GeneratorAr">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../res/icon/ar2.png" />
+                              <Image url="@../../res/icon/ar.png" />
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="العربية" />
+                     </tooltip>
                   </Label>
                   <Label fx:id="lblfr" onMouseClicked="#GeneratorFr">
                      <graphic>
@@ -43,10 +62,13 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Français" />
+                     </tooltip>
                   </Label>
                </children>
                <padding>
-                  <Insets bottom="5.0" top="5.0" />
+                  <Insets bottom="2.0" top="2.0" />
                </padding>
             </HBox>
          </children>

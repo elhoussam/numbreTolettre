@@ -1,5 +1,7 @@
 package application;
 
+import static me.elhoussam.mvn.generator.NumToLet.print;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,10 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import me.elhoussam.nbtolettre.GenAr;
-import me.elhoussam.nbtolettre.GenEn;
-import me.elhoussam.nbtolettre.GenFr;
-import me.elhoussam.nbtolettre.NumToLet;
+import me.elhoussam.mvn.generator.*; 
 
 public class SampleController implements Initializable {
 	@FXML    
@@ -25,9 +24,9 @@ public class SampleController implements Initializable {
 	private TextArea  TxtOutput ;
 	
 	@FXML    
-	private RadioButton  BtnAr , BtnEn , Btnfr ;
+	private RadioButton  BtnAr ,BtnInd , BtnEn , Btnfr ;
 	@FXML    
-	private Label  lblar , lblen , lblfr ;
+	private Label  lblar ,lblind , lblen , lblfr ;
 
 	@FXML 
 	protected void GeneratorAr() {
@@ -41,6 +40,11 @@ public class SampleController implements Initializable {
 	protected void GeneratorEn() {
 		Generator("En");
 	}
+
+	@FXML 
+	protected void GeneratorInd() {
+		Generator("Ind");
+	}
 	
 	
 	protected void Generator(String Id){
@@ -49,12 +53,16 @@ public class SampleController implements Initializable {
 	if (  (InputNumber.matches("\\d{1,18}")) ) {
 		String output = "";
 		NumToLet obj = null ;
+		print(Id+" : ");
 		if( Id.contains("Ar") ) {
 			obj = new GenAr(); TxtOutput.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 		}else { TxtOutput.setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
 			if( Id.contains("En") ) 	 obj = new GenEn();
-			else if( Id.contains("Fr") )	 obj = new GenFr(); 
+			else if( Id.contains("Fr") )	 obj = new GenFr();
+			else if ( Id.contains("Ind") )	 obj = new GenInd();
+			
 		}
+		print("\n");
 		output = obj.Generate( Long.parseLong(InputNumber) );
 		TxtOutput.setText( output );
 	}else{
@@ -67,15 +75,17 @@ public class SampleController implements Initializable {
 		
 		lblar.setGraphic(getImageView("icon/ar.png")  ); 
 		lblfr.setGraphic(getImageView("icon/fr.png")  );
+		lblind.setGraphic(getImageView("icon/ind.png")  );
 		lblen.setGraphic(getImageView("icon/en.png")  );
 		
 	}
- 	/*
+	/*
 	 * This main functionality of 
 	 * this method to show the picture
 	 * when i export the RunnableJar file  
 	 * */
 	private ImageView getImageView( String path ) {
+		
 		// i used only the path = "icon/mypic.png"
 		// because i refer to the parent folder as resource in eclipse settings
 		ImageView   a = new ImageView();

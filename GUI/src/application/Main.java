@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
-import static me.elhoussam.nbtolettre.NumToLet.print ;
+import static me.elhoussam.mvn.generator.NumToLet.print ;
 
 public class Main extends Application {
 	@Override
