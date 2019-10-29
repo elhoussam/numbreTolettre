@@ -8,7 +8,7 @@ Hint
 ----
 * input must be in this intervalle : [0, Long.MAX_VALUE]
 * you can switch ON/OFF colored output from ToggleColor()
-* Generate into three languages Arabic, English, Frensh
+* Generate into three languages Arabic, English, Frensh, Indian
 
 ![alt text](doc/img.png)
 
@@ -18,6 +18,7 @@ User Interface
 ![alt text](doc/doc_ar.png)
 ![alt text](doc/doc_en.png)
 ![alt text](doc/doc_fr.png)
+![alt text](doc/doc_ind.png)
 ![alt text](doc/doc_err.png)
 
 notice this project is open for any contribution
